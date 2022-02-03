@@ -6,6 +6,7 @@ import CreateBookService from '../services/CreateBookService';
 import UploadImageOfBookService from '../services/UploadImageOfBookService';
 import UpdateBookService from '../services/UpdateBookService';
 import UpdateBookStatusService from '../services/UpdateBookStatusService';
+import DeleteBookService from '../services/DeleteBookService';
 
 
 class BooksController {
@@ -112,7 +113,18 @@ class BooksController {
         const books = await booksRepository.finAllByTitle(title?.toString() || '');
     
         return response.json(books);
-      }
+    }    
+
+    public async destroy(request: Request, response: Response): Promise<Response> {
+        const { id } = request.params;
+
+        const bookRepository = new BooksRepository();
+        const destroyBook = new DeleteBookService(bookRepository);
+
+        await destroyBook.execute(Number(id));
+
+        return response.status(204).send(); //204 - no content
+    }
 }
 
 export default BooksController;

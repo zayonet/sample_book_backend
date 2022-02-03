@@ -7,7 +7,7 @@ import multerConfig from '../config/multer';
 const bookRoutes = Router();
 const bookController = new BooksController();
 
-/* bookRoutes.use(authenticate); */
+bookRoutes.use(authenticate);
 
 bookRoutes.get('/books', bookController.index);
 bookRoutes.get('/users/:user_id', bookController.findUserBooks);
@@ -25,5 +25,6 @@ bookRoutes.put(
 );
 bookRoutes.put('/:id', bookController.update);
 bookRoutes.patch('/:id', bookController.changeStatus);
+bookRoutes.delete('/:id', bookController.destroy);
 
 export default bookRoutes;

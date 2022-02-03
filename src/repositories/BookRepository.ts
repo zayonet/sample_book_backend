@@ -21,13 +21,13 @@ class BooksRepository implements IBooksRepository {
         });
     } */
 
-    public async findAllOfUser(user_id: string): Promise<Book[]> {
+    public async findAllOfUser(user_id: number): Promise<Book[]> {
         return this.ormRepository.find({
             where: { user_id },
         });
     }
 
-    public async findById(id: string): Promise<Book | undefined> {
+    public async findById(id: number): Promise<Book | undefined> {
         return this.ormRepository.findOne(id);
     }
 
@@ -60,7 +60,11 @@ class BooksRepository implements IBooksRepository {
         return this.ormRepository.find({
           title: Like(`%${title}%`),
         });
-      }
+    }
+
+    public async delete(id: number): Promise<void> {
+      this.ormRepository.delete(id);
+    }
 }
 
 export default BooksRepository;
