@@ -24,7 +24,7 @@ class BooksController {
         booksRepository,
         );
 
-        const books = await booksService.execute(user_id);
+        const books = await booksService.execute(Number(user_id));
 
         return response.json(books);
     }
@@ -34,7 +34,7 @@ class BooksController {
         const booksRepository = new BooksRepository();
         const booksService = new ShowBookService(booksRepository);
 
-        const book = await booksService.execute(id);
+        const book = await booksService.execute(Number(id));
 
         return response.json(book);
     }

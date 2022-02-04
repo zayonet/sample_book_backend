@@ -15,12 +15,6 @@ class BooksRepository implements IBooksRepository {
     }
 
 
-    /* public async findAll(): Promise<Book[]> {
-        return this.ormRepository.find({
-        relations: ['reader'],
-        });
-    } */
-
     public async findAllOfUser(user_id: number): Promise<Book[]> {
         return this.ormRepository.find({
             where: { user_id },

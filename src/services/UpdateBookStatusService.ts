@@ -4,7 +4,7 @@ import Book from '../models/Book';
 import BookStatus from '../enums/BookStatus';
 
 interface IRequest {
-  id: string;
+  id: number;
   status: BookStatus;
 }
 
