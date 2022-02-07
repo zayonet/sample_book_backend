@@ -13,8 +13,9 @@ import User from './User';
   
   @Entity('books')
     class Book {
-        @PrimaryGeneratedColumn()
-        id: number;
+        
+        @PrimaryGeneratedColumn('uuid')
+        id: string;
     
         @Column()
         title: string;
@@ -30,7 +31,7 @@ import User from './User';
         price: string;
 
         @Column({
-            type: 'text', //To force the type
+            type: "text", //To force the type
             default: null,
         })
         description: string;

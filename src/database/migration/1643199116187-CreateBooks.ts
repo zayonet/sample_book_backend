@@ -6,10 +6,12 @@ export default class CreateBooks1643199116187 implements MigrationInterface {
         await queryRunner.createTable(new Table({
             name: 'books',
             columns: [
-              {               
+              {            
                 name: 'id',
-                type: 'BIGINT',
-                isPrimary: true, 
+                type: 'uuid',
+                isPrimary: true,
+                generationStrategy: 'uuid',
+                default: 'uuid_generate_v4()',
               },
               {
                 name: 'title',

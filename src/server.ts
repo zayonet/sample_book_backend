@@ -36,4 +36,4 @@ app.use((error: Error, _request: Request, response: Response, _: NextFunction) =
     .json({ status: 'error', message: 'Internal server error' });
 })
 
-app.listen(3333);
+app.listen(3333, () => console.log("Server is running on port 3333"));

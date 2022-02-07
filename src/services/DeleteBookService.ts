@@ -8,7 +8,7 @@ class DeleteBookService {
     this.bookRepository = BookRepository;
   }
 
-  public async execute(id: number): Promise<void> {
+  public async execute(id: string): Promise<void> {
     const book = await this.bookRepository.findById(id);
 
     if (!book) {

@@ -121,7 +121,7 @@ class BooksController {
         const bookRepository = new BooksRepository();
         const destroyBook = new DeleteBookService(bookRepository);
 
-        await destroyBook.execute(Number(id));
+        await destroyBook.execute(id);
 
         return response.status(204).send(); //204 - no content
     }
