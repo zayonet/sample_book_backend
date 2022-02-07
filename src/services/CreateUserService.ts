@@ -18,7 +18,7 @@ class CreateUserService {
   
     public async execute({ name, email, password }: Request): Promise<User> {
       const passwordHash = await hash(password, 8);
-  
+      
       const user = await this.userRepository.create({
         name,
         email,

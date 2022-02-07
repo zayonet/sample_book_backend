@@ -3,7 +3,7 @@ import IBooksRepository from '../repositories/IBooksRepository';
 import Book from '../models/Book';
 
 interface IRequest {
-  id: number;
+  id: string;
   image: string;
 }
 

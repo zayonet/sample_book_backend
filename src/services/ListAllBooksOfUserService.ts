@@ -8,7 +8,7 @@ class ListAllBooksOfUserService {
     this.booksRepository = booksRepository;
   }
 
-  public async execute(user_id: number): Promise<Book[]> {
+  public async execute(user_id: string): Promise<Book[]> {
     const books = await this.booksRepository.findAllOfUser(user_id);
 
     return books;

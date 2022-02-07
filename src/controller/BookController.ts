@@ -24,7 +24,7 @@ class BooksController {
         booksRepository,
         );
 
-        const books = await booksService.execute(Number(user_id));
+        const books = await booksService.execute(user_id);
 
         return response.json(books);
     }
@@ -34,7 +34,7 @@ class BooksController {
         const booksRepository = new BooksRepository();
         const booksService = new ShowBookService(booksRepository);
 
-        const book = await booksService.execute(Number(id));
+        const book = await booksService.execute(id);
 
         return response.json(book);
     }
@@ -121,7 +121,7 @@ class BooksController {
         const bookRepository = new BooksRepository();
         const destroyBook = new DeleteBookService(bookRepository);
 
-        await destroyBook.execute(Number(id));
+        await destroyBook.execute(id);
 
         return response.status(204).send(); //204 - no content
     }

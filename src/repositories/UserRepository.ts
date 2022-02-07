@@ -2,6 +2,7 @@ import { Repository, getRepository } from 'typeorm';
 import User from '../models/User';
 import IUserRepository from './IUserRepository';
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
+import AppError from '../errors/AppError';
 
 class UserRepository implements IUserRepository {
 
@@ -11,7 +12,7 @@ class UserRepository implements IUserRepository {
     this.ormRepository = getRepository(User);
   }
 
-  public async findById(id: number): Promise<User | undefined> {
+  public async findById(id: string): Promise<User | undefined> {
     return this.ormRepository.findOne({
       where: { id },
     });
@@ -25,11 +26,21 @@ class UserRepository implements IUserRepository {
     return user;
   }
   public async create({ name, email, password }: ICreateUserDTO): Promise<User> {
+    
+    const checkUser = await this.ormRepository.findOne({
+      where: { email },
+    }); 
+    
+    if (checkUser?.email) {
+      throw new AppError('Este email já foi utilizado! Tente outro', 422);
+    }
+
     const user = this.ormRepository.create({
       name,
       email,
       password,
     });
+    
 
     await this.ormRepository.save(user);
 
