@@ -3,6 +3,9 @@ import CreateUserService from '../services/CreateUserService';
 import UserRepository from '../repositories/UserRepository';
 import EnableUserService from '../services/EnableUserService';
 
+interface IUser {
+  password?: string;
+}
 
 class UserController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -16,9 +19,10 @@ class UserController {
       email,
       password,
     });
-
-    delete user.password; //Para nao retornar a senha do usuario 
+ 
     
+    const deleteUserPwd: IUser = { password: user.password };
+    delete deleteUserPwd.password; //Para nao retornar a senha do usuario 
 
     return response.json(user);
   }
@@ -33,7 +37,8 @@ class UserController {
       id,
     });
 
-    delete user.password; //Para nao retornar a senha do usuario 
+    const deleteUserPwd: IUser = { password: user.password };
+    delete deleteUserPwd.password;
 
     return response.json(user);
   }

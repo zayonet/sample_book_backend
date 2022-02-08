@@ -15,6 +15,7 @@ interface Response {
   user: User;
 }
 
+
 class SessionService {
   private userRepository: IUserRepository;
 
@@ -43,7 +44,6 @@ class SessionService {
       expiresIn: '1d',
     });
 
-    delete user.password;
 
     return {
       token,
