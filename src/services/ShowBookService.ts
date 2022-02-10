@@ -9,7 +9,7 @@ class ShowBookService {
     this.booksRepository = booksRepository;
   }
 
-  public async execute(id: string): Promise<Book> {
+  public async execute(id: string): Promise<Book | undefined> {
     const book = await this.booksRepository.findById(id);
 
     if (!book) {

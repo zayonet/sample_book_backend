@@ -39,6 +39,15 @@ class BooksController {
     return response.json(book);
   }
 
+  public async search(request: Request, response: Response): Promise<Response> {
+    const { title } = request.query;
+    const booksRepository = new BooksRepository();
+
+    const books = await booksRepository.findAllByTitle(title?.toString() || '');
+
+    return response.json(books);
+  } 
+
   public async create(request: Request, response: Response): Promise<Response> {
     const { title, price, description, user_id } = request.body;
     const booksRepository = new BooksRepository();
@@ -104,16 +113,7 @@ class BooksController {
       });
 
       return response.json(book);
-  }
-
-  public async search(request: Request, response: Response): Promise<Response> {
-      const { title } = request.query;
-      const booksRepository = new BooksRepository();
-  
-      const books = await booksRepository.finAllByTitle(title?.toString() || '');
-  
-      return response.json(books);
-  }    
+  }  
 
   public async destroy(request: Request, response: Response): Promise<Response> {
       const { id } = request.params;

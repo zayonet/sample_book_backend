@@ -18,7 +18,7 @@ class UploadImageOfBookService {
     const book = await this.booksRepository.findById(id);
 
     if (!book) {
-      throw new AppError('Livro não encontrado', 400);
+      throw new AppError('Livro não encontrado', 404);
     }
 
     book.image = image;
