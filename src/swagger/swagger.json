@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API para registar de livros e Autores",
+    "description": "Este API tem como obejectivo registar diferentes livros de vários Autores com preços e descrição assim como apagar-los e edita-los. Isto para usuários autenticados no sistema.",
+    "termsOfService": "http://localhost:3333/terms",
+    "contact": {
+      "name": "API Support",
+      "email": "zayocode@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/api/vi",
+      "description":"API para teste"
+    }
+  ],
+  "paths": {
+    "/books":{
+      "post":{
+        "summary": "Registar livro",
+        "description": "Este routa é a responsável por registrar livro",
+        "tags": ["Books"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody":{
+          "content":{
+            "application/json": {
+              "schema":{
+                "$ref": "#/components/schemas/Book"
+              },
+              "exemples": {
+                "book":{
+                  "summary": "An example of a book",
+                  "values":{
+                    "id": "u$Erdser42d",
+                    "title": "About Python 3",
+                    "price": "23.6$",
+                    "description": "Novas aplicações e referença da linguagem Python",
+                    "image": "python-book.jpg",
+                    "status": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "401":{
+            "description": "Credenciais inválidas/Não autorizado"
+          },
+          "404":{
+            "description": "Livro não encontrado"
+          },
+          "200":{
+            "description": "OK",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "$ref":"#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties":{
+          "id": {
+            "type":"string"
+          },
+          "title": {
+            "type":"string"
+          },
+          "price": {
+            "type":"string"
+          },
+          "description": {
+            "type":"string"
+          },
+          "image": {
+            "type":"string"
+          },
+          "status": {
+            "type":"boolean"
+          }
+        }
+      }
+    },
+    "securitySchemes":{
+      "bearerAuth":{
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat":"JWT"
+      }
+    }
+  }
+}
