@@ -10,6 +10,7 @@ class BooksRepository implements IBooksRepository {
     constructor() {
         this.ormRepository = getRepository(Book);
     }
+
     public async findAll(): Promise<Book[]> {
         return this.ormRepository.find();
     }
@@ -18,6 +19,12 @@ class BooksRepository implements IBooksRepository {
     public async findAllOfUser(user_id: string): Promise<Book[]> {
         return this.ormRepository.find({
             where: { user_id },
+        });
+    }
+
+    public async findAllByTitle(title: string): Promise<Book[]> {
+        return this.ormRepository.find({
+          title: Like(`%${title}%`),
         });
     }
 
@@ -48,12 +55,6 @@ class BooksRepository implements IBooksRepository {
 
     public async save(book: Book): Promise<Book> {
         return this.ormRepository.save(book);
-    }
-
-    public async finAllByTitle(title: string): Promise<Book[]> {
-        return this.ormRepository.find({
-          title: Like(`%${title}%`),
-        });
     }
 
     public async delete(id: string): Promise<void> {

@@ -10,9 +10,13 @@ import AppError from './errors/AppError';
 
 import './config/env';
 
+import swagguerUi  from 'swagger-ui-express';
+import swaggerJson from './swagger/swagger.json'
+
 const app = express();
 app.use(cors());
 
+app.use("/api-documentation", swagguerUi.serve, swagguerUi.setup(swaggerJson))
 app.use(express.json());
 app.use(routes);
 
@@ -25,7 +29,7 @@ app.use('/files', express.static(resolve(__dirname, '..', 'uploads')))
     next(); 
 }); */
 
-//app.get('/', (request, response) => response.json({ message: 'Hello ZayoCode' }));
+app.get('/terms', (request, response) => response.json({ message: 'My terms' }));
 app.use((error: Error, _request: Request, response: Response, _: NextFunction) => {
     
     if(error instanceof AppError) {
