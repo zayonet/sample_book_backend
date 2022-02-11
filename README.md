@@ -33,7 +33,7 @@ PS: Caso utilize o NPM, apaque o arquivo yarn.lock para ter todas as dependênci
 
 🚀 Configurando banco de dados
 ```
-Utilizou-se o banco de dados MySQL através de TypeORM. 
+Utilizou-se o banco de dados MySQL através de TypeORM. (Exemplo de banco de dados usado no projecto está dentro do directório) 
 
 para configurar o nosso orm, basta criar um arquivo e passar as seguintes configurações
 ```
