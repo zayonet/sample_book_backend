@@ -22,12 +22,6 @@ app.use(routes);
 
 app.use('/files', express.static(resolve(__dirname, '..', 'uploads')))
 
-/* app.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "*"),
-    response.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE"),
-    app.use(cors());
-    next(); 
-}); */
 
 app.get('/terms', (request, response) => response.json({ message: 'My terms' }));
 app.use((error: Error, _request: Request, response: Response, _: NextFunction) => {
