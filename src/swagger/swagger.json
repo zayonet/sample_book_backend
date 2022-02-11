@@ -17,6 +17,90 @@
     }
   ],
   "paths": {
+    "/users":{
+      "post":{
+        "summary": "Registar Utilizador",
+        "description": "Este rota é a responsável por registrar livro",
+        "tags": ["Users"],
+        "requestBody":{
+          "content":{
+            "application/json": {
+              "schema":{
+                "$ref": "#/components/schemas/User"
+              },
+              "exemples": {
+                "user":{
+                  "summary": "An example of a user",
+                  "values":{
+                    "id": "b233382a-2670-4178-acf2-869c630a448b",
+                    "name": "John Lupy",
+                    "email": "Ejohn.lupy@exemplo.com",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses":{
+          "401":{
+            "description": "Credenciais inválidas/Não autorizado"
+          },
+          "404":{
+            "description": "Livro não encontrado"
+          },
+          "200":{
+            "description": "OK",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "$ref":"#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/get":{
+      "get":{
+        "summary": "Exibir Utilizador",
+        "description": "Buscar todos utilizadores registados no sistema",
+        "tags": ["Users"]
+      }
+    },
+    "/users/{id}":{
+      "get":{
+        "summary": "Utilizador pelo ID",
+        "description": "Buscar um utilizadores registado no sistema atravez de ID do utilizador",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Exibir o Utilizador pelo ID",
+            "require": true
+          }
+        ]
+      },
+      "responses":{
+        "404":{
+          "description": "Utilizador não encontrado"
+        },
+        "200":{
+          "description": "OK",
+          "content":{
+            "application/json":{
+              "schema":{
+                "type": "object",
+                "$ref":"#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
     "/books":{
       "post":{
         "summary": "Registar livro",
@@ -33,9 +117,9 @@
                 "book":{
                   "summary": "An example of a book",
                   "values":{
-                    "id": "u$Erdser42d",
+                    "id": "b233382a-2670-4178-acf2-869c630a448b",
                     "title": "About Python 3",
-                    "price": "23.6$",
+                    "price": "23.6",
                     "description": "Novas aplicações e referença da linguagem Python",
                     "image": "python-book.jpg",
                     "status": 1
@@ -69,6 +153,23 @@
   },
   "components": {
     "schemas": {
+      "User": {
+        "type": "object",
+        "properties":{
+          "id": {
+            "type":"string"
+          },
+          "name": {
+            "type":"string"
+          },
+          "email": {
+            "type":"string"
+          },
+          "password": {
+            "type":"string"
+          }
+        }
+      },
       "Book": {
         "type": "object",
         "properties":{
