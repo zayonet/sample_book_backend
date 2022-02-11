@@ -3,16 +3,16 @@ Esta é uma aplicação basica feita com NodeJS e TypeScript como exercicio liga
 É necessário o usuário candidatar-se para criar, atualizar e eliminar qualquer livro publicado no sistema.
 
 Para copiar o projeto, utilize os comandos:
-
+```
   # Clonar o repositório
   ❯ git clone https://github.com/zayonet/sample_book_backend.git
 
   # Entrar no diretório
   ❯ cd sample-book-backend
-
+```
 
 Para instalar as dependências e iniciar o projeto, você pode utilizar o Yarn ou NPM:
-
+```
 Utilizando yarn
 
   # Instalar as dependências
@@ -20,11 +20,11 @@ Utilizando yarn
 
   # Iniciar o projeto
   ❯ yarn dev
-
+```
 Utilizando npm
 
 PS: Caso utilize o NPM, apaque o arquivo yarn.lock para ter todas as dependências instaladas da melhor forma.
-
+```
   # Instalar as dependências
   ❯ npm install
 
@@ -32,11 +32,11 @@ PS: Caso utilize o NPM, apaque o arquivo yarn.lock para ter todas as dependênci
   ❯ node run dev
 
 🚀 Configurando banco de dados
-
+```
 Utilizou-se o banco de dados MySQL através de TypeORM. 
 
 para configurar o nosso orm, basta criar um arquivo e passar as seguintes configurações
-
+```
 {
   {
   "type": "mysql",
@@ -58,3 +58,4 @@ para configurar o nosso orm, basta criar um arquivo e passar as seguintes config
      "migrationsDir": "src/database/migration"
   }
 }
+```
