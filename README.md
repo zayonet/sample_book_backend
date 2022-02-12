@@ -1,4 +1,4 @@
-Esta é uma aplicação basica feita com NodeJS e TypeScript como exercicio ligado a uma bibloteca simples onde o usuário consegue fazer o CRUD completo pelos livros e também no próprio usuário.
+Esta é uma API basica feita com NodeJS e TypeScript como exercicio ligado a uma bibloteca simples onde o usuário consegue fazer o CRUD completo pelos livros e também no próprio usuário.
 
 É necessário o usuário candidatar-se para criar, atualizar e eliminar qualquer livro publicado no sistema.
 
