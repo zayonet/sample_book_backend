@@ -1,6 +1,6 @@
-Esta é uma API basica feita com NodeJS e TypeScript como exercicio ligado a uma bibloteca simples onde o usuário consegue fazer o CRUD completo pelos livros e também no próprio usuário.
+Esta é uma API basica feita com NodeJS e TypeScript para exercitar como exemplo de uma bibloteca simples onde o usuário consegue fazer o CRUD completo nos livros e também no próprio usuário estando ele autenticado.
 
-É necessário o usuário candidatar-se para criar, atualizar e eliminar qualquer livro publicado no sistema.
+É necessário o usuário registar-se para criar, atualizar e eliminar qualquer livro publicado no sistema.
 
 Para copiar o projeto, utilize os comandos:
 ```
