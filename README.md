@@ -63,6 +63,6 @@ Deverá correr com comano ```yarn typeorm migration:run``` para correr com o seu
 
 NOTE: pode acontecer algum erro porcausa do tipo de id usado no projecto ```UUID```, porcausa da vers\ao usada no MySQL que n\ao aceita este tipo. 
 
-###Para resolver isso:
+PARA RESOVER ISSO:
 - Precisa usar a versão "mariadb-10.6.5-winx64 - (https://mariadb.org/download/?t=mariadb&o=true&p=mariadb&r=10.2.6&os=windows&cpu=x86_64&pkg=msi)"
 - Importa directamente no banco de dados que criou o ficheiro SQL como exemplo de banco de imagem
