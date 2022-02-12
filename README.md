@@ -11,7 +11,7 @@ Para copiar o projeto, utilize os comandos:
   ❯ cd sample-book-backend
 ```
 
-Para instalar as dependências e iniciar o projeto, você pode utilizar o Yarn ou NPM:
+Para instalar as dependências e iniciar o projeto, você pode utilizar o ```Yarn``` ou ```NPM```:
 ```
 Utilizando yarn
 
@@ -23,7 +23,7 @@ Utilizando yarn
 ```
 Utilizando npm
 
-PS: Caso utilize o NPM, apaque o arquivo yarn.lock para ter todas as dependências instaladas da melhor forma.
+PS: Caso utilize o NPM, apaque o arquivo ```yarn.lock``` para ter todas as dependências instaladas da melhor forma.
 ```
   # Instalar as dependências
   ❯ npm install
@@ -33,7 +33,7 @@ PS: Caso utilize o NPM, apaque o arquivo yarn.lock para ter todas as dependênci
 
 🚀 Configurando banco de dados
 ```
-Utilizou-se o banco de dados MySQL através de TypeORM. (Exemplo de banco de dados usado no projecto está dentro do directório) 
+Utilizou-se o banco de dados ```MySQL``` com TypeORM (https://typeorm.io/#/). (Exemplo de banco de dados usado no projecto está dentro do directório) 
 
 para configurar o nosso orm, basta criar um arquivo e passar as seguintes configurações
 ```
@@ -59,3 +59,11 @@ para configurar o nosso orm, basta criar um arquivo e passar as seguintes config
   }
 }
 ```
+Deverá correr com comano ```yarn typeorm migration:run``` para correr com o seu banco criado.
+
+NOTE: pode acontecer algum erro porcausa do tipo de id usado no projecto ```UUID```, porcausa da vers\ao usada no MySQL que n\ao aceita este tipo. 
+
+###Para resolver isso:
+```
+#Precisa usar a versão "mariadb-10.6.5-winx64 - (https://mariadb.org/download/?t=mariadb&o=true&p=mariadb&r=10.2.6&os=windows&cpu=x86_64&pkg=msi)"
+#Importa directamente no banco de dados que criou o ficheiro SQL como exemplo de banco de imagem ```
