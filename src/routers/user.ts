@@ -7,7 +7,7 @@ import { ValidateUserSchemaOnRegistering, ValidateUserSchemaOnUpdating } from '.
 const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.get('/get', userController.index);
+userRoutes.get('/', userController.index);
 userRoutes.get('/search', userController.search);
 userRoutes.get('/:id', userController.show);
 userRoutes.post('/', ValidateUserSchemaOnRegistering, validateRequestSchema, userController.create);
