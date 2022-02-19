@@ -12,6 +12,8 @@ import './config/env';
 
 import swagguerUi  from 'swagger-ui-express';
 import swaggerJson from './swagger/swagger.json'
+import { sign } from 'jsonwebtoken';
+import { generateToken } from './services/generateToken';
 
 const app = express();
 app.use(cors());
@@ -23,7 +25,7 @@ app.use(routes);
 app.use('/files', express.static(resolve(__dirname, '..', 'uploads')))
 
 
-app.get('/terms', (request, response) => response.json({ message: 'My terms' }));
+app.get("/terms", (request, response) => response.json({ message: 'My terms' }));
 app.use((error: Error, _request: Request, response: Response, _: NextFunction) => {
     
     if(error instanceof AppError) {
@@ -33,5 +35,7 @@ app.use((error: Error, _request: Request, response: Response, _: NextFunction) =
     .status(500)
     .json({ status: 'error', message: 'Internal server error' });
 })
+
+app.get("/generate", (request, response) => response.json(generateToken()))
 
 app.listen(3333, () => console.log("Server is running on port 3333"));

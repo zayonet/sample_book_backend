@@ -14,8 +14,8 @@ bookRoutes.use(authenticate);
 
 const app = express();
 
-bookRoutes.get('/get', bookController.index);
-bookRoutes.get('/users/:user_id', bookController.findUserBooks);
+bookRoutes.get('/', bookController.index);
+bookRoutes.get('/user/:user_id', bookController.findUserBooks);
 bookRoutes.get('/search', bookController.search);
 bookRoutes.get('/:id', bookController.show);
 bookRoutes.post('/', multer(multerConfig).single('image'), validateBookSchemaFields, validateRequestSchema, ValidateImageBookSchema, bookController.create);

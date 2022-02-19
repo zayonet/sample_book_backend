@@ -7,9 +7,9 @@ import { ValidateUserSchemaOnRegistering, ValidateUserSchemaOnUpdating } from '.
 const userRoutes = Router();
 const userController = new UserController();
 
-userRoutes.get('/get', userController.index);
+userRoutes.get('/', userController.index);
 userRoutes.get('/search', userController.search);
-userRoutes.get('/:id', userController.show);
+userRoutes.get('/:id', authenticate, userController.show);
 userRoutes.post('/', ValidateUserSchemaOnRegistering, validateRequestSchema, userController.create);
 userRoutes.put('/:id', authenticate, ValidateUserSchemaOnUpdating, validateRequestSchema, userController.update);
 userRoutes.patch('/:id', authenticate, userController.enable);

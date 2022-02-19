@@ -11,10 +11,10 @@ routes.get('/', (request, response) =>
   response.json({ message: 'Hello ZayoCode' }),
 );
 
-routes.use(`${prefixRoutes}/users`, userRoutes);
-routes.use(`${prefixRoutes}/sessions`, sessionRoutes);
+routes.use(`${prefixRoutes}/user`, userRoutes);
+routes.use(`${prefixRoutes}/session`, sessionRoutes);
 
-routes.use(`${prefixRoutes}/books`, bookRoutes);
+routes.use(`${prefixRoutes}/book`, bookRoutes);
 
 export default routes; 
  
