@@ -15,6 +15,10 @@ interface Response {
   user: User;
 }
 
+interface IUser {
+  password?: string;
+}
+
 
 class SessionService {
   private userRepository: IUserRepository;
@@ -44,6 +48,8 @@ class SessionService {
       expiresIn: '1d',
     });
 
+    const deleteUserPwd: IUser = { password: user.password };
+    delete deleteUserPwd.password;
 
     return {
       token,
