@@ -19,7 +19,7 @@ bookRoutes.get('/user/:user_id', bookController.findUserBooks);
 bookRoutes.get('/search', bookController.search);
 bookRoutes.get('/:id', bookController.show);
 bookRoutes.post('/', multer(multerConfig).single('image'), validateBookSchemaFields, validateRequestSchema, ValidateImageBookSchema, bookController.create);
-bookRoutes.put( '/:id/upload', multer(multerConfig).single('image'), ValidateImageBookSchema, validateRequestSchema, bookController.uploadImage);
+bookRoutes.put('/:id/upload', multer(multerConfig).single('image'), ValidateImageBookSchema, validateRequestSchema, bookController.uploadImage);
 bookRoutes.put('/:id', validateBookSchemaFields, validateRequestSchema, bookController.update);
 bookRoutes.patch('/:id', bookController.changeStatus);
 bookRoutes.delete('/:id', bookController.destroy);
