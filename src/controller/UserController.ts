@@ -41,16 +41,16 @@ class UserController {
       email,
       password,
     });
-     
+
     const deleteUserPwd: IUser = { password: user.password };
     delete deleteUserPwd.password; //Para nao retornar a senha do usuario 
 
     return response.json(user);
   }
-  
+
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { name, email, password} = request.body;
+    const { name, email, password } = request.body;
     const userRepository = new UserRepository();
     const updateUser = new UpdateUserService(userRepository);
 
@@ -60,7 +60,7 @@ class UserController {
       email,
       password
     });
-    
+
     const deleteUserPwd: IUser = { password: user.password };
     delete deleteUserPwd.password; //Para nao retornar a senha do usuario 
 
@@ -68,13 +68,13 @@ class UserController {
   }
 
   public async search(request: Request, response: Response): Promise<Response> {
-      const { name } = request.query;
-      const userRepository = new UserRepository();
-  
-      const users = await userRepository.findAllByName(name?.toString() || '');
-  
-      return response.json(users);
-  }    
+    const { name } = request.query;
+    const userRepository = new UserRepository();
+
+    const users = await userRepository.findAllByName(name?.toString() || '');
+
+    return response.json(users);
+  }
 
 
   public async enable(request: Request, response: Response): Promise<Response> {
@@ -91,17 +91,17 @@ class UserController {
     delete deleteUserPwd.password;
 
     return response.json(user);
-  } 
+  }
 
   public async destroy(request: Request, response: Response): Promise<Response> {
-      const { id } = request.params;
+    const { id } = request.params;
 
-      const bookRepository = new UserRepository();
-      const destroyBook = new DeleteUserervice(bookRepository);
+    const bookRepository = new UserRepository();
+    const destroyBook = new DeleteUserervice(bookRepository);
 
-      await destroyBook.execute(id);
+    await destroyBook.execute(id);
 
-      return response.status(204).send(); //204 - no content
+    return response.status(204).send(); //204 - no content
   }
 }
 

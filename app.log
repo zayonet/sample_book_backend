@@ -1,0 +1,42 @@
+{"level":"error","message":"Hello, Winston logger, the first error!","serve":"user-service","timestamp":"2022-02-20T07:58:26.189Z"}
+{"level":"warn","message":"Hello, Winston logger, the first warning!","serve":"user-service","timestamp":"2022-02-20T07:58:26.192Z"}
+{"level":"warn","message":"Hello, Winston logger, the second warning!","serve":"user-service","timestamp":"2022-02-20T07:58:26.193Z"}
+{"level":"error","message":"Hello, Winston logger, the second error!","serve":"user-service","timestamp":"2022-02-20T07:58:26.193Z"}
+{"level":"info","message":"Hello, Winston logger, some info!","serve":"user-service","timestamp":"2022-02-20T07:58:26.194Z"}
+{"level":"info","message":"Server is running on port 3333","serve":"user-service","timestamp":"2022-02-20T07:58:26.196Z"}
+{"level":"error","message":"Hello, Winston logger, the first error!","serve":"user-service","timestamp":"2022-02-20T08:00:42.151Z"}
+{"level":"warn","message":"Hello, Winston logger, the first warning!","serve":"user-service","timestamp":"2022-02-20T08:00:42.154Z"}
+{"level":"warn","message":"Hello, Winston logger, the second warning!","serve":"user-service","timestamp":"2022-02-20T08:00:42.154Z"}
+{"level":"error","message":"Hello, Winston logger, the second error!","serve":"user-service","timestamp":"2022-02-20T08:00:42.155Z"}
+{"level":"info","message":"Hello, Winston logger, some info!","serve":"user-service","timestamp":"2022-02-20T08:00:42.155Z"}
+{"level":"info","message":"Server is running on port 3333","serve":"user-service","timestamp":"2022-02-20T08:00:42.157Z"}
+{"level":"error","message":"Hello, Winston logger, the first error!","serve":"user-service","timestamp":"2022-02-20T08:01:18.256Z"}
+{"level":"warn","message":"Hello, Winston logger, the first warning!","serve":"user-service","timestamp":"2022-02-20T08:01:18.259Z"}
+{"level":"warn","message":"Hello, Winston logger, the second warning!","serve":"user-service","timestamp":"2022-02-20T08:01:18.259Z"}
+{"level":"error","message":"Hello, Winston logger, the second error!","serve":"user-service","timestamp":"2022-02-20T08:01:18.259Z"}
+{"level":"info","message":"Hello, Winston logger, some info!","serve":"user-service","timestamp":"2022-02-20T08:01:18.260Z"}
+{"level":"info","message":"Server is running on port 3333","serve":"user-service","timestamp":"2022-02-20T08:01:18.261Z"}
+{"level":"error","message":"Hello, Winston logger, the first error!","serve":"user-service","timestamp":"2022-02-20T08:01:50.010Z"}
+{"level":"warn","message":"Hello, Winston logger, the first warning!","serve":"user-service","timestamp":"2022-02-20T08:01:50.013Z"}
+{"level":"warn","message":"Hello, Winston logger, the second warning!","serve":"user-service","timestamp":"2022-02-20T08:01:50.014Z"}
+{"level":"error","message":"Hello, Winston logger, the second error!","serve":"user-service","timestamp":"2022-02-20T08:01:50.014Z"}
+{"level":"info","message":"Hello, Winston logger, some info!","serve":"user-service","timestamp":"2022-02-20T08:01:50.015Z"}
+{"level":"info","message":"Server is running on port 3333","serve":"user-service","timestamp":"2022-02-20T08:01:50.017Z"}
+{"level":"error","message":"Hello, Winston logger, the first error!","meta":"meta-info","serve":"user-service","timestamp":"2022-02-20T08:06:39.787Z"}
+{"level":"warn","message":"Hello, Winston logger, the first warning!","serve":"user-service","timestamp":"2022-02-20T08:06:39.790Z"}
+{"level":"warn","message":"Hello, Winston logger, the second warning!","serve":"user-service","timestamp":"2022-02-20T08:06:39.790Z"}
+{"level":"error","message":"Hello, Winston logger, the second error!","serve":"user-service","timestamp":"2022-02-20T08:06:39.790Z"}
+{"level":"info","message":"Hello, Winston logger, some info!","serve":"user-service","timestamp":"2022-02-20T08:06:39.791Z"}
+{"level":"info","message":"Server is running on port 3333","serve":"user-service","timestamp":"2022-02-20T08:06:39.793Z"}
+[2022-02-20 08:10:34] [31merror[39m: Hello, Winston logger, the first error!
+[2022-02-20 08:10:34] [33mwarn[39m: Hello, Winston logger, the first warning!
+[2022-02-20 08:10:34] [33mwarn[39m: Hello, Winston logger, the second warning!
+[2022-02-20 08:10:34] [31merror[39m: Hello, Winston logger, the second error!
+[2022-02-20 08:10:34] [32minfo[39m: Hello, Winston logger, some info!
+[2022-02-20 08:10:34] [32minfo[39m: Server is running on port 3333
+[2022-02-20 08:15:49] [31merror[39m: Hello, Winston logger, the first error!
+[2022-02-20 08:15:49] [33mwarn[39m: Hello, Winston logger, the first warning!
+[2022-02-20 08:15:49] [33mwarn[39m: Hello, Winston logger, the second warning!
+[2022-02-20 08:15:49] [31merror[39m: Hello, Winston logger, the second error!
+[2022-02-20 08:15:49] [32minfo[39m: Hello, Winston logger, some info!
+[2022-02-20 08:15:49] [32minfo[39m: Server is running on port 3333
