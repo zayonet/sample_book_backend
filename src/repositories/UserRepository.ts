@@ -13,7 +13,7 @@ class UserRepository implements IUserRepository {
   }
 
   public async findAll(): Promise<User[]> {
-      return this.ormRepository.find();
+    return this.ormRepository.find();
   }
 
 
@@ -38,11 +38,11 @@ class UserRepository implements IUserRepository {
   }
 
   public async create({ name, email, password }: ICreateUserDTO): Promise<User> {
-    
+
     const checkUser = await this.ormRepository.findOne({
       where: { email },
-    }); 
-    
+    });
+
     if (checkUser?.email) {
       throw new AppError('Este email já foi utilizado! Tente outro', 422);
     }
@@ -52,25 +52,25 @@ class UserRepository implements IUserRepository {
       email,
       password,
     });
-    
+
 
     await this.ormRepository.save(user);
 
     return user;
   }
-  
+
 
   public async save(user: User): Promise<User> {
     return this.ormRepository.save(user);
   }
-  
+
   public async delete(id: string): Promise<void> {
     const user = this.ormRepository.delete(id);
     if (await user) {
       throw new AppError('Utilizador excluido', 200);
     }
   }
-  
+
 }
 
 export default UserRepository;

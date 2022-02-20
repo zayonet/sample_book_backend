@@ -1,3 +1,4 @@
 import { createConnection } from 'typeorm';
+import logger from '../logs';
 
-createConnection();
+createConnection().catch(error => logger.error(error));
