@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "API para registar de livros e Autores",
+    "title": "API para registar livros e Autores",
     "description": "Este API tem como obejectivo registar diferentes livros de vários Autores com preços e descrição assim como apagar-los e edita-los. Isto para usuários autenticados no sistema.",
     "termsOfService": "http://localhost:3333/terms",
     "contact": {
@@ -12,53 +12,1016 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3333/api/vi",
-      "description":"API para teste"
+      "url": "http://localhost:3333/api/v1",
+      "description": "API para teste"
     }
   ],
   "paths": {
-    "/books":{
-      "post":{
-        "summary": "Registar livro",
-        "description": "Este routa é a responsável por registrar livro",
-        "tags": ["Books"],
-        "security": [{ "bearerAuth": [] }],
-        "requestBody":{
-          "content":{
+    "/session": {
+      "post": {
+        "summary": "Autenticar o Utilizador",
+        "description": "Gerar token atravez da autenticacao do Utilizador",
+        "operationId": "sessionUser",
+        "parameters": [],
+        "tags": [
+          "session"
+        ],
+        "requestBody": {
+          "content": {
             "application/json": {
-              "schema":{
+              "schema": {
+                "$ref": "#/components/schemas/UserAuth"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Sessão criada para o utilizador co sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAuth"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos fornecidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Parâmetros inválidos fornecidos",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Entidade não processável",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Entidade não processável",
+                  "code": "422",
+                  "error": "Conflict"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Criar um novo Utilizador ",
+        "description": "Criar um novo Utilizador",
+        "operationId": "createUser",
+        "parameters": [],
+        "tags": [
+          "user"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Utilizador foi criado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos fornecidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Parâmetros inválidos fornecidos",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Entidade não reciclável",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Entidade não reciclável",
+                  "code": "422",
+                  "error": "Conflict"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Exibir os utilizadores na tela",
+        "description": "Busca de todos os utilizadores",
+        "operationId": "getUsers",
+        "parameters": [],
+        "tags": [
+          "user"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilizadores exibidos na tela com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/search": {
+      "get": {
+        "summary": "Procurar Utilizador",
+        "description": "Buscar utilizador de forma aleatoria pelo nome",
+        "tags": [
+          "user"
+        ],
+        "operationId": "searchUserByName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "O nome que precisa ser buscado. Exemplo Zinha para teste.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilizador exibido na tela com sucesso!",
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "Obter Utilizador por id",
+        "description": "Obter o Utilizador atraves do seu Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "operationId": "getUserById",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "O id que precisa ser buscado. Exemplo: b233382a-2670-4178-acf2-869c630a448b",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Utilizadores exibidos na tela com sucesso!",
+            "schema": {
+              "type": "array",
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Utilizador não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Utilizador não encontrado",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar um utilizador existente",
+        "description": "Atualizar um utilizador existente banco de dados ",
+        "operationId": "updateUser",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Objeto de utilizador que precisa ser adicionado ao banco",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
                 "$ref": "#/components/schemas/Book"
               },
               "exemples": {
-                "book":{
-                  "summary": "An example of a book",
-                  "values":{
-                    "id": "u$Erdser42d",
-                    "title": "About Python 3",
-                    "price": "23.6$",
-                    "description": "Novas aplicações e referença da linguagem Python",
-                    "image": "python-book.jpg",
-                    "status": 1
+                "user": {
+                  "summary": "Um exemplo de dados do utilizador",
+                  "values": {
+                    "id": "657766gg-hyy456-iigr89",
+                    "name": "Paul Gomez",
+                    "email": "paul@mail.com",
+                    "password": "123456",
+                    "active": 1,
+                    "created_at": "2002-02-02",
+                    "updated_at": "2002-02-03"
                   }
                 }
               }
             }
           }
         },
-        "responses":{
-          "401":{
-            "description": "Credenciais inválidas/Não autorizado"
+        "responses": {
+          "200": {
+            "description": "As informações do usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           },
-          "404":{
-            "description": "Livro não encontrado"
+          "400": {
+            "description": "Parâmetros inválidos fornecidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Parâmetros inválidos fornecidos",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
           },
-          "200":{
-            "description": "OK",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "type": "object",
-                  "$ref":"#/components/schemas/Book"
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Utilizador não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Utilizador não encontrado",
+                  "code": "404",
+                  "error": "Utilizador não encontrado"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir Utilizador",
+        "description": "Deletar o utilizador",
+        "operationId": "deleteUser",
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do utilizador a ser excluído",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Id do utilizador excluido com sucesso"
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Utilizador não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Utilizador não encontrado",
+                  "code": "404",
+                  "error": "Utilizador não encontrado"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Excluir Utilizador",
+        "description": "Deletar o utilizador",
+        "operationId": "deleteUser",
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do utilizador a ser excluído",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Id do utilizador excluido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Utilizador não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Utilizador não encontrado",
+                  "code": "404",
+                  "error": "Utilizador não encontrado"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book": {
+      "post": {
+        "summary": "Criar um novo Livro ",
+        "description": "Este routa é a responsável por registrar livro",
+        "operationId": "createBook",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "book"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              },
+              "exemples": {
+                "book": {
+                  "summary": "Um exemplo de campos para registar um livro",
+                  "values": {
+                    "title": "About Python 3",
+                    "price": "23.6$",
+                    "category": "#/components/schemas/category",
+                    "description": "Novas aplicações e referença da linguagem Python",
+                    "image": "python-book.jpg"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Livro foi criado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos fornecidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Parâmetros inválidos fornecidos",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Exibir os livros na tela",
+        "description": "Busca de todos os livros",
+        "operationId": "getUsers",
+        "parameters": [],
+        "tags": [
+          "book"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Livros exibidos na tela com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book/search": {
+      "get": {
+        "summary": "Procurar Livros",
+        "description": "Buscar livros de forma aleatoria pelo título",
+        "tags": [
+          "book"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "operationId": "searchBookByTitle",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "description": "O livro que precisa ser buscado. Exemplo title: Python 3 para teste.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livro exibido na tela com sucesso!",
+            "schema": {
+              "$ref": "#/components/schemas/Book"
+            }
+          }
+        }
+      }
+    },
+    "/book/{id}": {
+      "get": {
+        "summary": "Obter livro pelo id",
+        "description": "Obter o livro atraves do seu Id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "operationId": "getBookById",
+        "tags": [
+          "book"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "O id que precisa ser buscado. Exemplo: 81253d4b-4914-4ad3-b644-0ccd9ab7868d",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livro exibidos na tela com sucesso!",
+            "schema": {
+              "type": "array",
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Livro não encontrado",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualizar um livro existente",
+        "description": "Atualizar um livro existente banco de dados ",
+        "operationId": "updateBook",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "book"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Objeto de livro que precisa ser adicionado ao banco",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              },
+              "exemples": {
+                "user": {
+                  "summary": "Um exemplo de dados do livro",
+                  "values": {
+                    "id": "81253d4b-4914-4ad3-b644-0ccd9ab7868d",
+                    "title": "Python 3",
+                    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    "price": "135.63",
+                    "description": "some description",
+                    "image": "python3.jpeg",
+                    "category": "NEW",
+                    "created_at": "2022-02-11T00:51:53.677Z",
+                    "updated_at": "2022-02-11T00:51:53.677Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "As informações do livro",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Parâmetros inválidos fornecidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Parâmetros inválidos fornecidos",
+                  "code": "400",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Livro não encontrado",
+                  "code": "404",
+                  "error": "Livro não encontrado"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir livro",
+        "description": "Deletar o livro",
+        "operationId": "deleteBook",
+        "tags": [
+          "book"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do livro a ser excluído",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Livro excluido com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Book"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Livro não encontrado",
+                  "code": "404",
+                  "error": "Livro não encontrado"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Mudar o categoria do livro",
+        "description": "Mudar o categoria do livro. Exemplo: NEW, OLD, FREE, OFFER, RESEACH, BIOGRAPHY, CULTURE, SPORT, LITETURE",
+        "operationId": "changeCategoryBook",
+        "tags": [
+          "book"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do livro a ser atualizado",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookCategory"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Categoria do livro atulizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/category"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Livro não encontrado",
+                  "code": "404",
+                  "error": "Livro não encontrado"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/book/{id}/upload": {
+      "patch": {
+        "summary": "Mudar o imagem do livro",
+        "description": "Mudar o imagem do livro.",
+        "operationId": "changeImagemBook",
+        "tags": [
+          "book"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do livro a ser atualizado",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/BookImage"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Imagem do livro atulizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/category"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciais inválidas/Não autorizado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Credenciais inválidas/Não autorizado",
+                  "code": "401",
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Livro não encontrado!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "message": "Livro não encontrado",
+                  "code": "404",
+                  "error": "Livro não encontrado"
                 }
               }
             }
@@ -69,35 +1032,148 @@
   },
   "components": {
     "schemas": {
+      "category": {
+        "type": "string",
+        "enum": [
+          "NEW",
+          "OLD",
+          "FREE",
+          "OFFER",
+          "RESEACH",
+          "BIOGRAPHY",
+          "CULTURE",
+          "SPORT",
+          "LITETURE"
+        ],
+        "example": "BIOGRAPHY"
+      },
+      "image": {
+        "type": "string",
+        "format": "binary"
+      },
+      "UserAuth": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
       "Book": {
         "type": "object",
-        "properties":{
+        "properties": {
           "id": {
-            "type":"string"
+            "type": "string",
+            "format": "uuid"
           },
           "title": {
-            "type":"string"
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid"
           },
           "price": {
-            "type":"string"
+            "type": "string"
           },
           "description": {
-            "type":"string"
+            "type": "string",
+            "format": "text"
           },
           "image": {
-            "type":"string"
+            "$ref": "#/components/schemas/image"
           },
-          "status": {
-            "type":"boolean"
+          "category": {
+            "$ref": "#/components/schemas/category"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "BookCategory": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "$ref": "#/components/schemas/category"
+          }
+        }
+      },
+      "BookImage": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "$ref": "#/components/schemas/image"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "documentation": {
+            "type": "string"
           }
         }
       }
     },
-    "securitySchemes":{
-      "bearerAuth":{
+    "securitySchemes": {
+      "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "bearerFormat":"JWT"
+        "bearerFormat": "JWT"
       }
     }
   }

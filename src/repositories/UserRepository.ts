@@ -31,7 +31,7 @@ class UserRepository implements IUserRepository {
     return user;
   }
 
-  public async findAllByName(name: string): Promise<User[]> {
+  public async searcUserByName(name: string): Promise<User[]> {
     return this.ormRepository.find({
       name: Like(`%${name}%`),
     });

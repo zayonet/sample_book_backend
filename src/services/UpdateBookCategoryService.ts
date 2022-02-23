@@ -1,28 +1,28 @@
 import AppError from '../errors/AppError';
 import IBooksRepository from '../repositories/IBooksRepository';
 import Book from '../models/Book';
-import BookStatus from '../enums/BookStatus';
+import BookCategory from '../enums/BookCategory';
 
 interface IRequest {
   id: string;
-  status: BookStatus;
+  category: BookCategory;
 }
 
-class UpdateBookStatusService {
+class UpdateBookCategoryService {
   private booksRepository: IBooksRepository;
 
   constructor(booksRepository: IBooksRepository) {
     this.booksRepository = booksRepository;
   }
 
-  public async execute({ id, status }: IRequest): Promise<Book> {
+  public async execute({ id, category }: IRequest): Promise<Book> {
     const book = await this.booksRepository.findById(id);
 
     if (!book) {
       throw new AppError('Livro não encontrado', 404);
     }
 
-    book.status = status;
+    book.category = category;
 
     await this.booksRepository.save(book);
 
@@ -30,4 +30,4 @@ class UpdateBookStatusService {
   }
 }
 
-export default UpdateBookStatusService;
+export default UpdateBookCategoryService;

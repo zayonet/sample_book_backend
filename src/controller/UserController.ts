@@ -71,7 +71,7 @@ class UserController {
     const { name } = request.query;
     const userRepository = new UserRepository();
 
-    const users = await userRepository.findAllByName(name?.toString() || '');
+    const users = await userRepository.searcUserByName(name?.toString() || '');
 
     return response.json(users);
   }
