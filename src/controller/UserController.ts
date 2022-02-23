@@ -51,6 +51,7 @@ class UserController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { name, email, password } = request.body;
+    console.log(name + email + password)
     const userRepository = new UserRepository();
     const updateUser = new UpdateUserService(userRepository);
 
@@ -60,7 +61,6 @@ class UserController {
       email,
       password
     });
-
     const deleteUserPwd: IUser = { password: user.password };
     delete deleteUserPwd.password; //Para nao retornar a senha do usuario 
 
