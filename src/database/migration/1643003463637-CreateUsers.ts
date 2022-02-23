@@ -6,20 +6,20 @@ export default class CreateUsers1643003463637 implements MigrationInterface {
       name: 'users',
       columns: [
         {
-            name: 'id',
-            type: 'uuid',
-            isPrimary: true,
-            generationStrategy: 'uuid',
-            default: 'uuid_generate_v4()',
+          name: 'id',
+          type: 'uuid',
+          isPrimary: true,
+          generationStrategy: 'uuid',
+          default: 'uuid_generate_v4()',
         },
         {
-            name: 'name',
-            type: 'varchar',
+          name: 'name',
+          type: 'varchar',
         },
         {
-            name: 'email',
-            type: 'varchar',
-            isUnique: true,
+          name: 'email',
+          type: 'varchar',
+          isUnique: true,
         },
         {
           name: 'password',

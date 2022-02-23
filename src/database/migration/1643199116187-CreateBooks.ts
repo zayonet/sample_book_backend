@@ -19,7 +19,7 @@ export default class CreateBooks1643199116187 implements MigrationInterface {
         },
         {
           name: 'user_id',
-          type: 'int',
+          type: 'uuid'
         },
         {
           name: 'image',

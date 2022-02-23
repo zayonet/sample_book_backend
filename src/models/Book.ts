@@ -21,7 +21,7 @@ class Book {
   title: string;
 
   @Column()
-  user_id: number | string;
+  user_id: string;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
