@@ -8,10 +8,10 @@ export default class CreateBooks1643199116187 implements MigrationInterface {
       columns: [
         {
           name: 'id',
-          type: 'uuid',
+          type: 'CHAR',
           isPrimary: true,
           generationStrategy: 'uuid',
-          default: 'uuid_generate_v4()',
+          default: 'uuid()',
         },
         {
           name: 'title',
@@ -19,7 +19,8 @@ export default class CreateBooks1643199116187 implements MigrationInterface {
         },
         {
           name: 'user_id',
-          type: 'uuid'
+          type: 'varchar',
+          default: 'uuid()'
         },
         {
           name: 'image',

@@ -11,8 +11,8 @@ userRoutes.get('/', userController.index);
 userRoutes.get('/search', userController.search);
 userRoutes.get('/:id', authenticate, userController.show);
 userRoutes.post('/', ValidateUserSchemaOnRegistering, validateRequestSchema, userController.create);
-userRoutes.put('/:id', authenticate, ValidateUserSchemaOnUpdating, validateRequestSchema, userController.update);
+userRoutes.put('/:id', authenticate, ValidateUserSchemaOnUpdating, validateRequestSchema, userController.updates);
 userRoutes.patch('/:id', authenticate, userController.enable);
 userRoutes.delete('/:id', authenticate, userController.destroy);
 
-export default userRoutes; 
+export default userRoutes;

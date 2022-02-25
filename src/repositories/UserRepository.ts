@@ -53,7 +53,6 @@ class UserRepository implements IUserRepository {
       password,
     });
 
-
     await this.ormRepository.save(user);
 
     return user;

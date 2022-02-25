@@ -30,7 +30,7 @@ class UpdateBookService {
     image,
   }: IRequest): Promise<Book> {
     const book = await this.booksRepository.findById(id);
-    console.log(title)
+
     if (!book) {
       throw new AppError('Livro não encontrado', 404);
     }
