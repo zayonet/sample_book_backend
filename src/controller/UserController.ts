@@ -5,6 +5,7 @@ import EnableUserService from '../services/EnableUserService';
 import DeleteUserervice from '../services/DeleteUserService';
 import UpdateUserService from '../services/UpdateUserService';
 import ShowUserService from '../services/ShowUserService';
+import logger from '../logs';
 
 interface IUser {
   password?: string;
@@ -48,23 +49,28 @@ class UserController {
     return response.json(user);
   }
 
-  public async update(request: Request, response: Response): Promise<Response> {
+  public async updates(request: Request, response: Response): Promise<Response | undefined> {
     const { id } = request.params;
-    const { name, email, password } = request.body;
-    console.log(name + email + password)
-    const userRepository = new UserRepository();
-    const updateUser = new UpdateUserService(userRepository);
+    try {
+      const { name, email, password } = request.body;
+      console.log(request.body)
+      logger.info(' name:' + name + ' email:' + email + ' password:' + password)
+      const userRepository = new UserRepository();
+      const updateUser = new UpdateUserService(userRepository);
 
-    const user = await updateUser.execute({
-      id,
-      name,
-      email,
-      password
-    });
-    const deleteUserPwd: IUser = { password: user.password };
-    delete deleteUserPwd.password; //Para nao retornar a senha do usuario 
+      const user = await updateUser.execute({
+        id,
+        name,
+        email,
+        password
+      });
+      const deleteUserPwd: IUser = { password: user.password };
+      delete deleteUserPwd.password; //Para nao retornar a senha do usuario 
 
-    return response.json(user);
+      return response.json(user);
+    } catch (error) {
+      logger.error(error)
+    }
   }
 
   public async search(request: Request, response: Response): Promise<Response> {
