@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  database:
+    image: mariadb:10.4
+    container_name: 'database'
+    restart: 'always'
+    volumes:
+      - ./src/database/data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    networks:
+      - backend
+    environment:
+      MYSQL_USER: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'sample_books_project'
+  api:
+    image: node:16.13.2
+    container_name: 'api'
+    ports:
+      - '3333:3333'
+    working_dir: '/home/node/app'
+    volumes:
+      - ./:/home/node/app
+    command: 'yarn dev'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: 'bridge'
