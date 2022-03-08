@@ -13,10 +13,35 @@
   "servers": [
     {
       "url": "http://localhost:3333/api/v1",
-      "description": "API para teste"
+      "description": "API para teste de REST"
+    },
+    {
+      "url": "http://localhost:3333",
+      "description": "API para gerar TOKENS"
     }
   ],
   "paths": {
+    "/generate": {
+      "get": {
+        "summary": "Gerar o token automaticamente",
+        "description": "Gerar token atravez para o uso de autenticacao",
+        "operationId": "generateToken",
+        "parameters": [],
+        "tags": [
+          "Generate"
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessão criada para o utilizador co sucesso",
+            "content": {
+              "application/json": {
+                "description": "Codigo gerado"
+              }
+            }
+          }
+        }
+      }
+    },
     "/session": {
       "post": {
         "summary": "Autenticar o Utilizador",
