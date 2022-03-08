@@ -10,6 +10,9 @@ interface IRequest {
   price: string;
   description: string;
   image: string;
+  category: string;
+  author: string;
+  publishing_company: string;
 }
 
 class UpdateBookService {
@@ -28,6 +31,9 @@ class UpdateBookService {
     price,
     description,
     image,
+    category,
+    author,
+    publishing_company
   }: IRequest): Promise<Book> {
     const book = await this.booksRepository.findById(id);
 
@@ -46,6 +52,9 @@ class UpdateBookService {
     book.price = price;
     book.description = description;
     book.image = image;
+    book.category = category;
+    book.author = author;
+    book.publishing_company = publishing_company;
 
     await this.booksRepository.save(book);
 

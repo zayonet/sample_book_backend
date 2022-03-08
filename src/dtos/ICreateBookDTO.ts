@@ -6,5 +6,7 @@ export default interface ICreateBookDTO {
   image?: string;
   price: string;
   description: string;
-  category: BookCategory;
+  category: string;
+  author: string;
+  publishing_company: string;
 }

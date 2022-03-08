@@ -36,13 +36,25 @@ class Book {
   })
   description: string;
 
+  @Column({
+    default: null,
+  })
+  author: string;
+
+  @Column({
+    default: null,
+  })
+  publishing_company: string;
+
+
   @Column()
   image: string;
 
   @Column({
-    type: 'varchar' //To force the type
+    type: 'varchar', //To force the type
+    default: null,
   })
-  category: BookCategory;
+  category: string;
 
   @CreateDateColumn()
   created_at: Date;

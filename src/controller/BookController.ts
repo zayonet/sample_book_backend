@@ -50,7 +50,7 @@ class BooksController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { title, price, description, user_id } = request.body;
+    const { title, price, description, user_id, category, author, publishing_company } = request.body;
     const booksRepository = new BooksRepository();
     const createBook = new CreateBookService(booksRepository);
 
@@ -59,7 +59,10 @@ class BooksController {
       user_id,
       price,
       image: request.file?.filename,
-      description
+      description,
+      category,
+      author,
+      publishing_company
     });
 
     return response.status(201).json(book);
@@ -84,8 +87,8 @@ class BooksController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { title, user_id, price, description, image } = request.body;
-
+    const { title, user_id, price, description, category, author, publishing_company } = request.body;
+    const { filename } = request.file;
     const booksRepository = new BooksRepository();
     const userRepository = new UserRepository();
     const updateBook = new UpdateBookService(booksRepository, userRepository);
@@ -96,7 +99,10 @@ class BooksController {
       user_id,
       price,
       description,
-      image,
+      image: filename,
+      category,
+      author,
+      publishing_company
     });
 
     return response.json(book);
