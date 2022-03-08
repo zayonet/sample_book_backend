@@ -39,6 +39,8 @@ class BooksRepository implements IBooksRepository {
     price,
     description,
     category,
+    author,
+    publishing_company
   }: ICreateBookDTO): Promise<Book> {
     const book = this.ormRepository.create({
       title,
@@ -47,6 +49,8 @@ class BooksRepository implements IBooksRepository {
       price,
       description,
       category,
+      author,
+      publishing_company
     });
 
     await this.ormRepository.save(book);

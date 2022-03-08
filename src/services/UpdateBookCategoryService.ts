@@ -5,7 +5,7 @@ import BookCategory from '../enums/BookCategory';
 
 interface IRequest {
   id: string;
-  category: BookCategory;
+  category: string;
 }
 
 class UpdateBookCategoryService {

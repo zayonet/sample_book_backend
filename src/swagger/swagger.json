@@ -531,7 +531,9 @@
                     "price": "23.6$",
                     "category": "#/components/schemas/category",
                     "description": "Novas aplicações e referença da linguagem Python",
-                    "image": "python-book.jpg"
+                    "image": "python-book.jpg",
+                    "author": "Fernando Pires",
+                    "publishing_company": "Editora Mendes"
                   }
                 }
               }
@@ -1134,6 +1136,12 @@
           },
           "category": {
             "$ref": "#/components/schemas/category"
+          },
+          "author": {
+            "type": "string"
+          },
+          "publishing_company": {
+            "type": "string"
           },
           "created_at": {
             "type": "string",

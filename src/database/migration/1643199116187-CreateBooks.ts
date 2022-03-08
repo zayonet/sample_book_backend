@@ -37,8 +37,19 @@ export default class CreateBooks1643199116187 implements MigrationInterface {
           isNullable: true,
         },
         {
+          name: 'author',
+          type: 'varchar',
+          isNullable: true
+        },
+        {
+          name: 'publishing_company',
+          type: 'varchar',
+          isNullable: true
+        },
+        {
           name: 'category',
           type: 'varchar',
+          isNullable: true
         },
         {
           name: 'created_at',

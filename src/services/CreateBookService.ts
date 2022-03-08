@@ -8,7 +8,10 @@ interface IRequest {
   image?: string;
   description: string;
   user_id: string;
-  price: string
+  price: string;
+  author: string;
+  publishing_company: string;
+  category: string;
 
 }
 
@@ -25,7 +28,10 @@ class CreateBookService {
     user_id,
     image,
     price,
-    description
+    description,
+    category,
+    author,
+    publishing_company
   }: IRequest): Promise<Book> {
 
     const book = await this.booksRepository.create({
@@ -34,7 +40,9 @@ class CreateBookService {
       image,
       price,
       description,
-      category: BookCategory.NEW,
+      category,
+      author,
+      publishing_company
     });
 
     return book;
