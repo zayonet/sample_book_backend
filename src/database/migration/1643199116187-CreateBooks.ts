@@ -66,9 +66,9 @@ export default class CreateBooks1643199116187 implements MigrationInterface {
       foreignKeys: [
         {
           name: 'books_to_users_fk',
+          referencedTableName: 'users',
           columnNames: ['user_id'],
           referencedColumnNames: ['id'],
-          referencedTableName: 'users',
           onDelete: 'CASCADE',
           onUpdate: 'CASCADE',
         },

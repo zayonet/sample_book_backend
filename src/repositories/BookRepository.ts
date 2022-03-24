@@ -29,7 +29,9 @@ class BooksRepository implements IBooksRepository {
   }
 
   public async findById(id: string): Promise<Book | undefined> {
-    return this.ormRepository.findOne(id);
+    return this.ormRepository.findOne(id, {
+      relations: ['user'],
+    });
   }
 
   public async create({
