@@ -25,6 +25,7 @@ class UpdateUserService {
   }: IRequest): Promise<User> {
     const user = await this.userRepository.findById(id);
     const passwordHash = await hash(password, 8);
+
     if (!user) {
       throw new AppError('Não foi encontrado este utilizador no sistema', 404);
     }
